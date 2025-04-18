@@ -1,3 +1,4 @@
+const Guess = require('../guess/guess.sequelize');
 const Match = require('../match/match.sequelize');
 
 async function createMatch(data) {
@@ -15,25 +16,30 @@ async function createMatch(data) {
 
 }
 
-
 async function findCurrentMatch(userId) {
+
   try {
-    
+
     const match = await Match.findOne({
-      where: { 
+      where: {
         user_id: userId,
-        isCompleted: false  
-      }
+        is_completed: false
+      },
+      include: [
+        {
+          model: Guess,
+          as: 'guesses'
+        }
+      ]
     });
 
     return match;
 
   } catch (err) {
 
-    throw new Error('Error in repository layer');
+    throw new Error('Error in repository layer'+ err);
 
   }
-
 }
 
 
@@ -47,14 +53,15 @@ async function updateMatch(id, data) {
     }
 
     await match.update(data);
+
     return match;
 
   } catch (error) {
 
-    console.error('Error updating match:', error);
     throw error;
 
   }
+
 }
 
 

@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/sequelize');
 const User = require('../user/user.sequelize');
+const Guess = require('../guess/guess.sequelize');
 
 const Match = sequelize.define('matches', {
   id: {
@@ -36,7 +37,7 @@ const Match = sequelize.define('matches', {
     field: 'is_completed',
   }
 }, {
-  underscored: true, // Aplica snake_case automaticamente nos relacionamentos (ex: user_id)
+  underscored: true, 
 });
 
 Match.belongsTo(User, {
@@ -44,6 +45,15 @@ Match.belongsTo(User, {
     name: 'user_id',
     allowNull: false,
   },
+  onDelete: 'CASCADE',
+});
+
+Match.hasMany(Guess, {
+  foreignKey: {
+    name: 'matchId',
+    allowNull: false,
+  },
+  as: 'guesses', 
   onDelete: 'CASCADE',
 });
 
