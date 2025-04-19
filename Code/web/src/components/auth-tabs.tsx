@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -12,9 +13,9 @@ import { login, register } from "@/services/auth";
 import { LoginUserSkeleton, RegisterUserSkeleton, User } from "@/lib/types"; 
 
 
-
 export default function AuthTabs() {
 
+  const router = useRouter();
   const [loginData, setLoginData] = useState<LoginUserSkeleton>({ email: "", password: "" });
   const [registerData, setRegisterData] = useState<RegisterUserSkeleton>({ username: "", email: "", password: "" });
 
@@ -32,6 +33,7 @@ export default function AuthTabs() {
         position: "bottom-right",
         theme: "colored",
       });
+      router.push("/home");
 
     } catch (error) {
 
@@ -59,6 +61,7 @@ export default function AuthTabs() {
         position: "bottom-right",
         theme: "colored",
       });
+      router.push("/home");
       
     } catch (error) {
       toast.error("Registration failed: " + error, { 

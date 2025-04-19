@@ -1,5 +1,5 @@
-const { Guess } = require('../model/guess/guess.sequelize'); 
-const { registerGuessOnCurrentMatch } = require('../service/guess.service')
+const { registerGuessOnCurrentMatch } = require('../service/guess.service');
+const { searchCurrentMatch } = require('../service/match.service')
 
 async function createGuessController(req, res) {
 
@@ -11,9 +11,10 @@ async function createGuessController(req, res) {
       return res.status(401).json({ error: 'User not authenticated' });
     }
 
-    const guess = await registerGuessOnCurrentMatch(req.body, user);
+    await registerGuessOnCurrentMatch(req.body, user);
+    const currentMatch = await searchCurrentMatch(user);
 
-    return res.status(201).json(guess);
+    return res.status(201).json(currentMatch);
 
   } catch (error) {
 

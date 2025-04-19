@@ -17,7 +17,7 @@ async function registerGuessOnCurrentMatch(data, user) {
     }
 
     const guess = await create({
-        answer: compareNumbers(currentMatchResult, userGuessNumber),
+        tip: compareNumbers(currentMatchResult, userGuessNumber),
         isCorrect: (currentMatchResult == userGuessNumber),
         number: data.number,
         matchId: currentMatchId
@@ -44,6 +44,8 @@ function compareNumbers(correctNumber, guessNumber) {
       return "Congratulations! You guessed the correct number.";
     }
 }
+
+
 
 module.exports = {
     registerGuessOnCurrentMatch,

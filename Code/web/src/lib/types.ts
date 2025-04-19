@@ -1,10 +1,4 @@
-export interface ApiRequest<T>{
-    data: T
-}
 
-export interface ApiListRequest<T>{
-    data: T[]
-}
 
 export interface RegisterUserSkeleton{
     username: string

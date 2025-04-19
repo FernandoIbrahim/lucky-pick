@@ -17,7 +17,7 @@
       allowNull: false,
       field: 'is_correct',
     },
-    answer: {
+    tip: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -32,3 +32,4 @@
   });
 
 module.exports = Guess;
+
