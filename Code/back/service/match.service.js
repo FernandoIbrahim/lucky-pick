@@ -3,7 +3,7 @@ const { randomInt } = require('crypto');
 
 async function registerMatch(user) {
 
-    if(isNaN(await searchCurrentMatch(user) )){
+    if((await searchCurrentMatch(user))){
 
       throw Error('User already has a match open');
 
@@ -33,7 +33,7 @@ async function searchCurrentMatch(user) {
 
   const match = await findCurrentMatch(user.id);
 
-  if (match == null) {
+  if (!match) {
     return null;
   }
 
@@ -57,7 +57,7 @@ async function searchCurrentMatchId(user) {
 
   const match = await findCurrentMatch(user.id);
 
-  if (match == null) {
+  if (!match) {
     return null;
   }
 

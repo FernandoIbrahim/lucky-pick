@@ -1,16 +1,24 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 import { useState, useEffect } from "react";
-import { getCurrentMatchId, startMatch as startNewMatch } from "@/services/match";
+import { getCurrentMatchId, startMatch , sendGuess  } from "@/services/match";
+import { ToastContainer, toast } from 'react-toastify'
+import { Guess } from "@/lib/types";
+
+import TipModal from "@/components/home/tip-model";
 
 const Home = () => {
-  const [matchId, setMatchId] = useState(null); // null = no match
+
+  const [matchId, setMatchId] = useState(null);
+  const [guessNumber, setGuessNumber] = useState<string>("");
+  const [lastGuessResult, setLastGuessResult] = useState<Guess | null>(null);
 
   useEffect(() => {
 
-    const fetchMatch = async () => {
+    const fetchCurrentMatch = async () => {
       try {
 
         const currentMatchId = await getCurrentMatchId();
@@ -18,7 +26,7 @@ const Home = () => {
         if (currentMatchId != null) {
 
           setMatchId(currentMatchId);
-          console.log('curent match finded: ' + currentMatchId);
+          console.log('curent match found: ' + currentMatchId);
         }
 
       } catch (error) {
@@ -29,23 +37,77 @@ const Home = () => {
 
     };
 
-    fetchMatch();
+    fetchCurrentMatch();
   }, []);
 
   const handleStartMatch = async () => {
 
     try {
-      const newMatchId = await startNewMatch();
+      const newMatchId = await startMatch();
 
       if (newMatchId != null) {
         setMatchId(newMatchId);
+        toast.success("New match created",{ 
+          autoClose: 5000,
+          pauseOnHover: true,
+          position: "bottom-right",
+          theme: "colored",
+        });
       }
 
     } catch (error) {
 
-      console.error("Failed to start new match:", error);
+      toast.error("Failed to start new match: " + error, { 
+        autoClose: 5000,
+        pauseOnHover: true,
+        position: "bottom-right",
+        theme: "colored",
+      });
 
     }
+  };
+
+
+  const handleSendGuess = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+
+      const number = parseInt(guessNumber);
+
+      if (isNaN(number) || number > 100 || number < 1) {
+        toast.error("Please enter a valid number between 1 and 100",{ 
+          autoClose: 5000,
+          pauseOnHover: true,
+          position: "bottom-right",
+          theme: "colored",
+        });
+        return;
+      }
+
+      const newGuess : Guess = await sendGuess({ number: number });
+
+      if(newGuess.isCorrect){
+        setMatchId(null);
+      }
+
+      setLastGuessResult(newGuess);
+
+
+      toast.success("Guess send",{ 
+        autoClose: 5000,
+        pauseOnHover: true,
+        position: "bottom-right",
+        theme: "colored",
+      });
+
+    } catch (error: any) {
+
+      console.error("Failed to send guess:", error);
+      alert(error.message || "Error sending guess.");
+
+    }
+
   };
 
 
@@ -69,10 +131,27 @@ const Home = () => {
           <>
             <h1 className="text-5xl font-extrabold mb-8 text-gray-800"> Guess the Number</h1>
             <p className="text-gray-500 mb-6 text-lg">Enter your best guess below</p>
-            <Input className="w-full px-4 py-3 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <Input
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={guessNumber}
+                onChange={(e) => setGuessNumber(e.target.value)}
+                placeholder="Your guess..."
+              />
+            <Button
+                type="submit"
+                className="w-full bg-blue-600 mt-5 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl"
+                onClick={handleSendGuess}
+            >Submit </Button>
           </>
         )}
       </div>
+      <ToastContainer/>
+
+      {lastGuessResult && (
+              <div className="mt-8">
+                <TipModal number={lastGuessResult.number} tip={lastGuessResult.tip} />
+              </div>
+      )}
     </div>
   );
 }

@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/', authenticateJWT , createController);
 router.get('/current', authenticateJWT , getCurrentMatchController);
-router.post('/current/guess', authenticateJWT , createGuessController);
+router.post('/current/guesses', authenticateJWT , createGuessController);
 
 
 module.exports = router;

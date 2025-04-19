@@ -1,4 +1,5 @@
 import { API_JSON_CLIENT } from '@/lib/api';
+import { sendGuessReqSkeleton } from '@/lib/types';
 
 export const getCurrentMatchId = async () => {
 
@@ -25,3 +26,16 @@ export const getCurrentMatchId = async () => {
 
 
   };
+
+
+    
+export const sendGuess = async (data: sendGuessReqSkeleton) => {
+
+  const response = await API_JSON_CLIENT.post("/matches/current/guesses", data);
+
+  if (!response?.data?.id) {
+    throw new Error(response.data.error);
+  }
+  return response.data;
+
+};

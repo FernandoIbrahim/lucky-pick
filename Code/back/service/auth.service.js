@@ -5,59 +5,62 @@ const { findByEmail, create, findByUsername } = require('../model/user/user.repo
 
 const JWT_SECRET = 'dti';
 
-async function login(email, password) {
-  const user = await findByEmail(email);
+  async function login(username, password) {
 
-  if (!user) {
-    throw new Error('User not found');
-  }
+    const currentUser = await findByUsername(username);
+    console.log(username);
+    console.log(currentUser.id);
 
-  const isMatch = await bcrypt.compare(password, user.password);
-
-  if (!isMatch) {
-    throw new Error('Incorrect password');
-  }
-
-  const token = jwt.sign(
-    { id: user.id, email: user.email },
-    JWT_SECRET,
-    { expiresIn: '7d' }
-  );
-
-  return { token, user };
-
-}
-
-async function register(username, email, password) {
-
-
-    if (await findByEmail(email)) {
-      throw new Error('Email already in use');
+    if (!currentUser) {
+      throw new Error('User not found');
     }
 
-    if(await findByUsername(username)){
-        throw new Error('Username already in use');
+    const isMatch = await bcrypt.compare(password, currentUser.password);
+
+    if (!isMatch) {
+      throw new Error('Incorrect password');
     }
-  
-    const hashedPassword = await bcrypt.hash(password, 10);
-  
-    const newUser = await create({
-      username,
-      email,
-      password: hashedPassword
-    });
-  
+
     const token = jwt.sign(
-      { id: newUser.id, email: newUser.email },
+      { user_id: currentUser.id, email: currentUser.email },
       JWT_SECRET,
       { expiresIn: '7d' }
     );
-  
-    return { token, user: newUser };
 
-}
+    return { token, currentUser };
 
-module.exports = {
-  login,
-  register
-};
+  }
+
+  async function register(username, email, password) {
+
+
+      if (await findByEmail(email)) {
+        throw new Error('Email already in use');
+      }
+
+      if(await findByUsername(username)){
+          throw new Error('Username already in use');
+      }
+    
+      const hashedPassword = await bcrypt.hash(password, 10);
+    
+      const newUser = await create({
+        username,
+        email,
+        password: hashedPassword
+      });
+    
+      const token = jwt.sign(
+        { user_id: newUser.id, email: newUser.email },
+        JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+    
+      return { token, user: newUser };
+
+  }
+
+  module.exports = {
+    login,
+    register
+  };

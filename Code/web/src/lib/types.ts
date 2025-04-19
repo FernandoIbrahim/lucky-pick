@@ -7,7 +7,7 @@ export interface RegisterUserSkeleton{
 }
 
 export interface LoginUserSkeleton{
-    email: string
+    username: string
     password: string
 }
 
@@ -17,3 +17,13 @@ export interface User{
     username: string,
     email: string
 }
+
+export interface sendGuessReqSkeleton {
+    number: number;
+}
+
+export type Guess = {
+    tip: string;
+    isCorrect: boolean;
+    number: number;
+  };

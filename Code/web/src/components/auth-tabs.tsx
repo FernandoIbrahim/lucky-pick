@@ -16,7 +16,7 @@ import { LoginUserSkeleton, RegisterUserSkeleton, User } from "@/lib/types";
 export default function AuthTabs() {
 
   const router = useRouter();
-  const [loginData, setLoginData] = useState<LoginUserSkeleton>({ email: "", password: "" });
+  const [loginData, setLoginData] = useState<LoginUserSkeleton>({ username: "", password: "" });
   const [registerData, setRegisterData] = useState<RegisterUserSkeleton>({ username: "", email: "", password: "" });
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
@@ -50,11 +50,10 @@ export default function AuthTabs() {
 
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     
-    console.log("sending register");
     e.preventDefault();
     try {
 
-      const user: User = await register(registerData);
+      await register(registerData);
       toast.success("Registration successful", { 
         autoClose: 5000,
         pauseOnHover: true,
@@ -90,10 +89,10 @@ export default function AuthTabs() {
             </label>
             <Input
               id="login-email"
-              type="email"
-              placeholder="Email"
-              value={loginData.email} // Bind username to email input
-              onChange={(e) => setLoginData({ ...loginData, email: e.target.value.toLowerCase() })}
+              type="text"
+              placeholder="Username"
+              value={loginData.username} // Bind username to email input
+              onChange={(e) => setLoginData({ ...loginData, username: e.target.value.toLowerCase() })}
             />
           </div>
           <div className="flex flex-col gap-1">

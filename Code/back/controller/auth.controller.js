@@ -2,11 +2,11 @@ const { login, register } = require('../service/auth.service');
 
 const loginController = async (req, res) => {
 
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
 
-    const { token, user } = await login(email, password);
+    const { token, user } = await login(username, password);
     return res.status(200).json({ token, user });
 
   } catch (error) {
