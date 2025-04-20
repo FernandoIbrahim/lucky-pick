@@ -126,13 +126,16 @@ const Home = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-stone-100">
+    <main className="flex flex-col items-center min-h-screen px-6 bg-stone-100">
+      <section className="flex flex-col h-[200px] items-center justify-center">
       {lastGuessResult && (
               <div className="mb-8 ">
                 <TipModal number={lastGuessResult.number} tip={lastGuessResult.tip} />
               </div>
       )}
-      <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-md text-center transition-all duration-300 border border-gray-200">
+      </section>
+
+      <section className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-md text-center transition-all duration-300 border border-gray-200">
         {currentMatch == null ? (
           <>
             <h1 className="text-5xl font-extrabold mb-8 text-gray-800"> Welcome</h1>
@@ -147,7 +150,7 @@ const Home = () => {
         ) : (
           <>
             <h1 className="text-5xl font-extrabold mb-8 text-gray-800"> Guess the Number</h1>
-            <p className="text-gray-500 mb-6 text-lg">Enter your best guess below!<br/><span className="text-xs">Only numbers between 0 / 100</span></p>
+            <p className="text-gray-500 mb-6 text-lg">Enter your best guess below!<br/><span className="text-xs">Only numbers between 1 / 100</span></p>
             <Input
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={guessNumber}
@@ -161,10 +164,10 @@ const Home = () => {
             >Submit </Button>
           </>
         )}
-      </div>
+      </section>
       <GuessHistorySection guesses={currentMatch?.guesses}/>
       <ToastContainer/>
-    </div>
+    </main>
   );
 }
 export default Home;
