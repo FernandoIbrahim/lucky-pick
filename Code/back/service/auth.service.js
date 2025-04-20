@@ -8,8 +8,6 @@ const JWT_SECRET = 'dti';
   async function login(username, password) {
 
     const currentUser = await findByUsername(username);
-    console.log(username);
-    console.log(currentUser.id);
 
     if (!currentUser) {
       throw new Error('User not found');

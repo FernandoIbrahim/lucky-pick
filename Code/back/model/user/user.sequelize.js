@@ -23,6 +23,21 @@ const User = sequelize.define('user', {
   }
 });
 
+async function initializeDatabase() {
+  try {
+
+    await sequelize.sync();
+
+  } catch (error) {
+
+    console.error('Error initializing database:', error);
+
+  }
+  
+}
+
+// Executa
+initializeDatabase();
 
 
 module.exports = User;
