@@ -30,7 +30,8 @@ async function findCurrentMatch(userId) {
           model: Guess,
           as: 'guesses'
         }
-      ]
+      ],
+      order: [[{ model: Guess, as: 'guesses' }, 'createdAt', 'DESC']]
     });
 
     return match;

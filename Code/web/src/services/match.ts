@@ -1,15 +1,15 @@
 import { API_JSON_CLIENT } from '@/lib/api';
 import { sendGuessReqSkeleton } from '@/lib/types';
 
-export const getCurrentMatchId = async () => {
+export const getCurrentMatch = async () => {
 
       const response = await API_JSON_CLIENT.get("/matches/current");
   
-      if (!response?.data?.id) {
+      if (!response?.data) {
         return null;
       }
   
-      return response.data.id;
+      return response.data;
 
   };
   
@@ -22,7 +22,7 @@ export const getCurrentMatchId = async () => {
         throw new Error(response.data.error);
       }
   
-      return response.data.id;
+      return response.data;
 
 
   };

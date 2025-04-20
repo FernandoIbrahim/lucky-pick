@@ -4,15 +4,16 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { useState, useEffect } from "react";
-import { getCurrentMatchId, startMatch , sendGuess  } from "@/services/match";
+import { getCurrentMatch, startMatch , sendGuess  } from "@/services/match";
 import { ToastContainer, toast } from 'react-toastify'
-import { Guess } from "@/lib/types";
+import { Guess, Match } from "@/lib/types";
+import { GuessHistorySection } from "@/components/home/guess-history-section";
 
 import TipModal from "@/components/home/tip-model";
 
 const Home = () => {
 
-  const [matchId, setMatchId] = useState(null);
+  const [currentMatch, setCurrentMatch] = useState<Match | null>(null);
   const [guessNumber, setGuessNumber] = useState<string>("");
   const [lastGuessResult, setLastGuessResult] = useState<Guess | null>(null);
 
@@ -21,12 +22,13 @@ const Home = () => {
     const fetchCurrentMatch = async () => {
       try {
 
-        const currentMatchId = await getCurrentMatchId();
+        const match = await getCurrentMatch();
 
-        if (currentMatchId != null) {
+        if (match != null) {
 
-          setMatchId(currentMatchId);
-          console.log('curent match found: ' + currentMatchId);
+          setCurrentMatch(match);
+          console.log('curent match found: ' + match.id);
+
         }
 
       } catch (error) {
@@ -40,19 +42,25 @@ const Home = () => {
     fetchCurrentMatch();
   }, []);
 
+
   const handleStartMatch = async () => {
 
     try {
-      const newMatchId = await startMatch();
+      const newMatch = await startMatch();
 
-      if (newMatchId != null) {
-        setMatchId(newMatchId);
+      setLastGuessResult(null);
+      
+      if (newMatch != null) {
+
+        setCurrentMatch(newMatch);
+
         toast.success("New match created",{ 
           autoClose: 5000,
           pauseOnHover: true,
           position: "bottom-right",
           theme: "colored",
         });
+
       }
 
     } catch (error) {
@@ -65,6 +73,7 @@ const Home = () => {
       });
 
     }
+
   };
 
 
@@ -86,9 +95,12 @@ const Home = () => {
       }
 
       const newGuess : Guess = await sendGuess({ number: number });
+      const updatedMatch = await getCurrentMatch();
+
+      setCurrentMatch(updatedMatch);
 
       if(newGuess.isCorrect){
-        setMatchId(null);
+        setCurrentMatch(null);
       }
 
       setLastGuessResult(newGuess);
@@ -115,8 +127,13 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 bg-stone-100">
+      {lastGuessResult && (
+              <div className="mb-8 ">
+                <TipModal number={lastGuessResult.number} tip={lastGuessResult.tip} />
+              </div>
+      )}
       <div className="bg-white shadow-2xl rounded-3xl p-10 w-full max-w-md text-center transition-all duration-300 border border-gray-200">
-        {matchId == null ? (
+        {currentMatch == null ? (
           <>
             <h1 className="text-5xl font-extrabold mb-8 text-gray-800"> Welcome</h1>
             <p className="text-gray-500 mb-6 text-lg">Ready to challenge your mind?</p>
@@ -130,7 +147,7 @@ const Home = () => {
         ) : (
           <>
             <h1 className="text-5xl font-extrabold mb-8 text-gray-800"> Guess the Number</h1>
-            <p className="text-gray-500 mb-6 text-lg">Enter your best guess below</p>
+            <p className="text-gray-500 mb-6 text-lg">Enter your best guess below!<br/><span className="text-xs">Only numbers between 0 / 100</span></p>
             <Input
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={guessNumber}
@@ -145,13 +162,8 @@ const Home = () => {
           </>
         )}
       </div>
+      <GuessHistorySection guesses={currentMatch?.guesses}/>
       <ToastContainer/>
-
-      {lastGuessResult && (
-              <div className="mt-8">
-                <TipModal number={lastGuessResult.number} tip={lastGuessResult.tip} />
-              </div>
-      )}
     </div>
   );
 }

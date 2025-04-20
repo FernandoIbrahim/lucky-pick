@@ -85,7 +85,7 @@ export default function AuthTabs() {
         <form className="mt-6 flex flex-col gap-4" onSubmit={handleLoginSubmit}>
           <div className="flex flex-col gap-1">
             <label htmlFor="login-email" className="text-sm font-medium">
-              Email
+              Username
             </label>
             <Input
               id="login-email"

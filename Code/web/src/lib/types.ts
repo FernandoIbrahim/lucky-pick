@@ -23,7 +23,14 @@ export interface sendGuessReqSkeleton {
 }
 
 export type Guess = {
+    id: number
     tip: string;
     isCorrect: boolean;
     number: number;
+  };
+
+
+export type Match = {
+    id: number,
+    guesses: Guess[] | null
   };

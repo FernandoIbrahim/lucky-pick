@@ -37,9 +37,9 @@ async function searchGuessesByMatchId(matchId) {
 
 function compareNumbers(correctNumber, guessNumber) {
     if (guessNumber > correctNumber) {
-      return "The guess number is bigger than the correct number.";
+      return "The guessed number is bigger than the correct number.";
     } else if (guessNumber < correctNumber) {
-      return "The guess number is smaller than the correct number.";
+      return "The guessed number is smaller than the correct number.";
     } else {
       return "Congratulations! You guessed the correct number.";
     }
