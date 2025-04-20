@@ -23,7 +23,7 @@ This entity represents each player of the application, enabling persistence of g
 
 I ended up with the following database entity-relationship diagram:
 
-![[er.png]]
+![er.png](https://github.com/FernandoIbrahim/lucky-pick/blob/main/Docs/database/er.png)
 
 To manage those users, I implemented registration, login, and authorization functionalities.
 ## Front-end
@@ -48,7 +48,7 @@ The backend folder structure is organized by **data flow layers**, a commonly us
 
 That sequence can be easily represented by the following sequence diagram:
 
-![[create-match.png]]
+![Create Match Sequence Diagram](https://github.com/FernandoIbrahim/lucky-pick/raw/main/Docs/backend/sequence-driagrams/create-match.png)
 
 
 # Execution
