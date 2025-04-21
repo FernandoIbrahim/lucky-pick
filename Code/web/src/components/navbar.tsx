@@ -11,7 +11,7 @@ export default function Navbar(){
           <div className="mr-20 relative">
             <ul className="flex flex-row gap-x-[3vw] items-center">
               <li>
-                <IconButton content="wrote-document" title="History" mainUrl="/matches-ranking"/>
+                <IconButton content="wrote-document" title="Ranking" mainUrl="/matches-ranking"/>
               </li>
             </ul>
           </div>
