@@ -2,7 +2,7 @@
 
 **LuckPick** is a straightforward web application where users can play a simple game by guessing a correct random number between 1 and 100.
 
-The application was developed using React.js and Next.js on the frontend, with **shadcn/ui** as the component library to ensure a clean and modern user interface. On the backend, we used Node.js with Express.js for routing and Sequelize as the ORM. For the database, we chose SQLite due to its simplicity and the advantage of being serverless, making it ideal for lightweight applications and rapid development.
+The application was developed using React.js on the frontend, with **shadcn/ui** as the component library to ensure a clean and modern user interface. On the backend, it was used Node.js with Express.js for routing and Sequelize as the ORM. For the database, it was chosen SQLite due to its simplicity and the advantage of being serverless, making it ideal for lightweight applications and rapid development.
 
 
 # Considered Assumptions
@@ -30,6 +30,7 @@ I ended up with the following database entity-relationship diagram:
 To address these assumptions and solve the problems related to game persistence and user guess history, I made the following architectural decisions:
 
 To manage those users above, I implemented registration, login, and authorization functionalities.
+
 ## Front-end
 
 Focusing on core functionalities and avoiding boilerplate code, such as building login and registration modals from scratch. I chose to use **shadcn/ui** for its highly reusable and easily customizable components. Additionally, I used **Tailwind CSS**, a utility-first CSS framework, to speed up the styling process with predefined classes.
@@ -54,11 +55,17 @@ That sequence can be easily represented by the following sequence diagram:
 
 ![Create Match Sequence Diagram](https://github.com/FernandoIbrahim/lucky-pick/raw/main/Docs/backend/sequence-driagrams/create-match.png)
 
+## Security
+In addition to everything mentioned above, the entire guess validation process is handled by the backend, preventing any kind of undesired behavior or unauthorized data access.
+
+To securely identify participants, a JWT token is issued upon registration. This token is required in all requests related to the game, ensuring both authentication and authorization throughout the session.
 
 # Execution
 
-Initially, to run any kind of JavaScript code, you need to have Node.js and a package manager (like npm or yarn) installed on your machine, and ensure you’re using a recent version.
+Initially, to run any kind of JavaScript code, you need to have Node.js and a package manager (like npm or yarn) installed on your machine, and ensure you’re using a recent version, such as:
 
+	•	Node.js: v23.9.0
+	•	NPM: v10.9.2
 
 ## Front-end
 
