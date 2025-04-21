@@ -2,7 +2,7 @@
 
 **LuckPick** is a straightforward web application where users can play a simple game by guessing a correct random number between 1 and 100.
 
-The application was developed using React.js on the frontend, with **shadcn/ui** as the component library to ensure a clean and modern user interface. On the backend, I used Node.js with Express.js for routing and Sequelize as the ORM. For the database, we chose SQLite due to its simplicity and the advantage of being serverless, making it ideal for lightweight applications and rapid development.
+The application was developed using React.js on the frontend, with **shadcn/ui** as the component library to ensure a clean and modern user interface. On the backend, it was used Node.js with Express.js for routing and Sequelize as the ORM. For the database, it was chosen SQLite due to its simplicity and the advantage of being serverless, making it ideal for lightweight applications and rapid development.
 
 
 # Considered Assumptions
