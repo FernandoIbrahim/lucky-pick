@@ -24,24 +24,26 @@ export default function MatchesRankingPage() {
   }, []);
 
   return (
-    <div className="p-6 md:p-12 max-w-4xl mx-auto">
+    <div className="p-6 md:p-12 max-w-4xl mx-auto w-full">
         <Navbar/>
-        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800 mt-20">
-          🏆 Fast Guessers Ranking
-        </h1>
+        <div className="flex flex-col items-center">
+          <h1 className="text-3xl font-bold text-center mb-8 text-gray-800 mt-20">
+            🏆 Fast Guessers Ranking
+          </h1>
 
-            {loading ? (
-              <p className="text-gray-500 text-center">Carregando ranking...</p>
-            ) : ranking.length === 0 ? (
-              <p className="text-gray-500 text-center">Nenhum ranking disponível.</p>
-            ) : (
-              <div className=" gap-6 flex flex-col items-center justify-center w-full">
+              {loading ? (
+                <p className="text-gray-500 text-center">Carregando ranking...</p>
+              ) : ranking.length === 0 ? (
+                <p className="text-gray-500 text-center">Nenhum ranking disponível.</p>
+              ) : (
+                <div className=" gap-6 flex flex-col items-center justify-center w-full">
 
-                {ranking.map((item, index) => (
-                  <RankingCard key={index} username={item.username} matchId={item.match_id} correctNumber={item.correct_number} guessesCount={item.guesses_count}/>
-                ))}
-              </div>
-            )}
+                  {ranking.map((item, index) => (
+                    <RankingCard key={index} username={item.username} matchId={item.match_id} correctNumber={item.correct_number} guessesCount={item.guesses_count}/>
+                  ))}
+                </div>
+              )}
+          </div>
         </div>
   );    
 }

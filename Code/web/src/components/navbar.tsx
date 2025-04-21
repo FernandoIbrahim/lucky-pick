@@ -3,7 +3,7 @@ import IconButton from "@/components/utils/icon-button";
 export default function Navbar(){
 
     return (
-        <nav className="fixed top-0 left-0 w-full flex flex-row items-center h-20 justify-between z-10 gap-1 text-black">
+        <nav className="fixed top-0 left-0 w-full flex flex-row items-center h-20 justify-between z-100 bg-stone-100 gap-1 text-black">
           <div className="left-10 flex relative">
             <IconButton content="home" title="Home"  mainUrl="/home"/>
           </div>

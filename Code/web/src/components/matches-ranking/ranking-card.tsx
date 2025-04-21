@@ -9,7 +9,7 @@ import { RankingCardProps } from "@/lib/types";
     return (
       <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition w-full max-w-[500px]">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-indigo-700 capitalize">
+          <h2 className="text-xl font-bold text-blue-600 capitalize">
             {username}
           </h2>
           <span className="text-sm font-medium text-gray-500">

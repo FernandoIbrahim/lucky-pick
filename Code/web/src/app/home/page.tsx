@@ -130,9 +130,9 @@ const Home = () => {
     <div>
       <Navbar/>
       <main className="flex flex-col items-center min-h-screen px-6 bg-stone-100">
-        <section className="flex flex-col h-[200px] items-center justify-center">
+        <section className="flex flex-col h-[150px] items-center justify-center mt-20">
         {lastGuessResult && (
-                <div className="mb-8 ">
+                <div>
                   <TipModal number={lastGuessResult.number} tip={lastGuessResult.tip} />
                 </div>
         )}
