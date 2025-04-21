@@ -62,8 +62,10 @@ To securely identify participants, a JWT token is issued upon registration. This
 
 # Execution
 
-Initially, to run any kind of JavaScript code, you need to have Node.js and a package manager (like npm or yarn) installed on your machine, and ensure you’re using a recent version.
+Initially, to run any kind of JavaScript code, you need to have Node.js and a package manager (like npm or yarn) installed on your machine, and ensure you’re using a recent version, such as:
 
+	•	Node.js: v23.9.0
+	•	NPM: v10.9.2
 
 ## Front-end
 
