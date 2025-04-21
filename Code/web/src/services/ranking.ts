@@ -14,7 +14,7 @@ export const getMatchRanking = async (): Promise<MatchRankingList | null> => {
     return response.data;
   } catch (error) {
 
-    console.error("Erro ao buscar o ranking da partida:", error);
+    console.error("Error fetching the match ranking ", error);
     return null;
     
   }

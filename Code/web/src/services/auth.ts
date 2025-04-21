@@ -18,11 +18,11 @@ export const login = async (credentials: LoginUserSkeleton) => {
     } catch (error: any) {
         
         if (axios.isAxiosError(error)) {
-            const msg = error.response?.data?.error || "Erro ao realizar login.";
+            const msg = error.response?.data?.error || "Login error ";
             throw new Error(msg); 
         }
 
-        throw new Error("Erro inesperado.");
+        throw new Error("Unexpected error");
     }
 
 
