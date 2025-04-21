@@ -25,7 +25,11 @@ I ended up with the following database entity-relationship diagram:
 
 ![er.png](https://github.com/FernandoIbrahim/lucky-pick/blob/main/Docs/database/er.png)
 
-To manage those users, I implemented registration, login, and authorization functionalities.
+# Architectural Decisions
+
+To address these assumptions and solve the problems related to game persistence and user guess history, I made the following architectural decisions:
+
+To manage those users above, I implemented registration, login, and authorization functionalities.
 ## Front-end
 
 Focusing on core functionalities and avoiding boilerplate code, such as building login and registration modals from scratch. I chose to use **shadcn/ui** for its highly reusable and easily customizable components. Additionally, I used **Tailwind CSS**, a utility-first CSS framework, to speed up the styling process with predefined classes.
