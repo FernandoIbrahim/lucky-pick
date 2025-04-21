@@ -34,3 +34,21 @@ export type Match = {
     id: number,
     guesses: Guess[] | null
   };
+
+
+export type MatchRanking = {
+  match_id: number;
+  correct_number: number;
+  guesses_count: number;
+  username: string;
+};
+
+export type RankingCardProps = {
+  username: string;
+  matchId: number;
+  correctNumber: number;
+  guessesCount: number;
+};
+
+
+export type MatchRankingList = MatchRanking[];

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { API_JSON_CLIENT } from '@/lib/api';
 
 
-export const login = async (credentials: LoginUserSkeleton): Promise<User> => {
+export const login = async (credentials: LoginUserSkeleton) => {
 
     try{
 
@@ -56,8 +56,9 @@ export const register = async (credentials: RegisterUserSkeleton): Promise<User>
     }catch(error: any){
 
         if (axios.isAxiosError(error)) {
+            
             const msg = error.response?.data?.error || "Error during the registration.";
-            throw new Error(msg); // propaga pro componente
+            throw new Error(msg);
         }
         
         throw new Error(error.message);

@@ -170,19 +170,22 @@
   },
   "active": "47ab2c4cef4414b2",
   "lastOpenFiles": [
-    "Code/db/database.db",
+    "Code/web/src/components/matches-ranking/ranking-card.tsx",
+    "Code/web/src/components/matches-ranking/matches.tsx",
+    "Code/web/src/components/matches-ranking",
+    "Code/web/src/services/ranking.ts",
+    "Code/web/src/app/matches-ranking/page.tsx",
+    "Code/web/src/app/matches-ranking",
+    "Code/web/public/icons/icons.svg",
+    "Code/web/public/icons/icons-v2.svg",
+    "Code/web/public/icons",
+    "Code/web/src/components/navbar.tsx",
+    "Code/web/src/components/utils/icon-button.tsx",
+    "Code/web/src/components/utils",
+    "Code/back/model/ranking/ranking.repository.js",
     "README.md",
     "Docs/backend/sequence-driagrams/create-match.png",
-    "Docs/backend/sequence-driagrams/create-match.png.bak",
-    "Docs/backend/sequence-driagrams/create-match.asta",
-    "Docs/backend/sequence-driagrams/create-match.asta.lock",
-    "Docs/backend/sequence-driagrams",
     "Docs/database/er.png",
-    "Docs/database/er.svg",
-    "Docs/backend",
-    "Docs/untitled folder",
-    "Docs/database",
-    "Docs",
-    "untitled folder"
+    "Docs/database/er.svg"
   ]
 }
