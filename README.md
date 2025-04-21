@@ -30,6 +30,7 @@ I ended up with the following database entity-relationship diagram:
 To address these assumptions and solve the problems related to game persistence and user guess history, I made the following architectural decisions:
 
 To manage those users above, I implemented registration, login, and authorization functionalities.
+
 ## Front-end
 
 Focusing on core functionalities and avoiding boilerplate code, such as building login and registration modals from scratch. I chose to use **shadcn/ui** for its highly reusable and easily customizable components. Additionally, I used **Tailwind CSS**, a utility-first CSS framework, to speed up the styling process with predefined classes.
@@ -54,6 +55,10 @@ That sequence can be easily represented by the following sequence diagram:
 
 ![Create Match Sequence Diagram](https://github.com/FernandoIbrahim/lucky-pick/raw/main/Docs/backend/sequence-driagrams/create-match.png)
 
+## Security
+In addition to everything mentioned above, the entire guess validation process is handled by the backend, preventing any kind of undesired behavior or unauthorized data access.
+
+To securely identify participants, a JWT token is issued upon registration. This token is required in all requests related to the game, ensuring both authentication and authorization throughout the session.
 
 # Execution
 
