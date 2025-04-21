@@ -19,11 +19,11 @@ import { RankingCardProps } from "@/lib/types";
   
         <div className="text-sm text-gray-600 space-y-1">
           <p>
-            <span className="font-semibold text-gray-800">Número correto:</span>{' '}
+            <span className="font-semibold text-gray-800">Correct number:</span>{' '}
             {correctNumber}
           </p>
           <p>
-            <span className="font-semibold text-gray-800">Tentativas:</span>{' '}
+            <span className="font-semibold text-gray-800">Tries:</span>{' '}
             {guessesCount}
           </p>
         </div>
