@@ -119,3 +119,14 @@ This will launch the application at port 8080 by default.
 
 No additional configuration is required to run the database, as SQLite3 is a serverless database. The Sequelize ORM handles all necessary commands automatically, including creating the database file and tables if they don’t already exist.
 
+
+### Possible issue fix
+
+During the second execution of the backend, you may encounter an error when trying to access the database file again.
+This issue typically occurs because the operating system user doesn’t have the necessary permissions to access the directory created by the sqlite3 module.
+
+To fix this, you can grant full permissions to all files and folders in the root of your project using the following command:
+
+```
+sudo chmod -R 777 .
+```
